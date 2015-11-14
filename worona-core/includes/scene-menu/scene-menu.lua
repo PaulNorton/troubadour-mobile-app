@@ -297,7 +297,7 @@ local function newScene( scene_name )
 			parent            = sceneGroup,
 			text              = "Menu",
 			left_button_icon  = nil,
-			right_button_icon = worona.style:get("icons").menu
+			right_button_icon = worona.style:get("icons").back_right
 		})
 
 		--: load the navbar
