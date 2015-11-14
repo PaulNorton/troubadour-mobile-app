@@ -120,7 +120,7 @@ local function newBasicNavBar( self, params )
 	        overFile    = params.right_button_icon.over,
 	        onRelease   = function() worona:do_action( "navbar_right_button_pushed" ); return true end
 		}
-		navbar.right_button_width = params.left_button_icon.width
+		navbar.right_button_width = params.right_button_icon.width
 		navbar.right_button = widget.newButton( right_button_options )
 		navbar.display_group:insert( navbar.right_button )
 

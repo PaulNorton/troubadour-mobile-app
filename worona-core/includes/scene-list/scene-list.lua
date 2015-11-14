@@ -114,7 +114,9 @@ local function newScene( scene_name )
 	            elseif event.phase == "ended" then
 	            	row_rect:setFillColor( params.row_color.default[1], params.row_color.default[2], params.row_color.default[3], params.row_color.default[4] ) 
 	                display.getCurrentStage():setFocus(nil)
-	                worona:do_action( "load_url", { url = params.content.link } )
+	                if params.content.link ~= "AD" then
+	                	worona:do_action( "load_url", { url = params.content.link } )
+	                end
 	            elseif event.phase == "cancelled" then
 	            	row_rect:setFillColor( params.row_color.default[1], params.row_color.default[2], params.row_color.default[3], params.row_color.default[4] ) 
 	            end
@@ -267,6 +269,38 @@ local function newScene( scene_name )
 				    --. Insert the current row into the scrollView
 				    scrollView:insertRow (row_options)
 				    inserted_posts_counter = inserted_posts_counter + 1
+				    if inserted_posts_counter == 10 then --. Create an ad
+				    	local row_group = display.newGroup() --. All row elements must me inserted in this group.
+
+						local title_options = 
+						{	
+							text     = "Sponsored Ad",
+							x        = display.contentWidth/2, 
+							y        = style.row.offset,
+							width    = style.title.width,     --required for multi-line and alignment
+							font     = style.title.font_type,
+							fontSize = style.title.font_size
+						}
+						title_options = worona:do_filter( "filter_list_row_title_options", title_options )
+
+						local row_text = display.newText( title_options )
+						row_text:setFillColor( style.title.font_color.r, style.title.font_color.g, style.title.font_color.b )
+						row_text.anchorY = 0
+						row_group:insert(row_text)
+
+						local row_options = 
+						{
+							row_text   = row_text,
+							row_height = row_text.height,
+							row_color  = user_config_style.post_list_row_color,
+							content    = {link = worona.ad_website_url},
+							row_group  = row_group					    	
+						}
+						row_options = worona:do_filter( "filter_list_row_options", row_options )
+
+						--. Insert the current row into the scrollView
+						scrollView:insertRow (row_options)
+					end
 				end
 			end
 

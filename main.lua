@@ -13,10 +13,12 @@ worona.log:start( { level = "WARNING", reset_log = true, console = true, file = 
 
 -- WORONA APP CONFIGURATION
 worona.current_style       = "default"				-- Choose your theme.
-worona.wp_url              = "http://www.worona.org"  -- Enter the url from which the app will read the data.
-worona.app_title           = "Worona Blog"			-- Enter the main title of your app.
+worona.wp_url              = "http://www.troubonline.com"  -- Enter the url from which the app will read the data.
+worona.app_title           = "The Troubadour Online"			-- Enter the main title of your app.
 worona.app_number_of_posts = 20			-- Choose the max number of posts to be shown in your app. Worona will always retrieve the latest posts.
 worona.content_type        = "post"
+worona.ad_image_url		   = "http://www.troubonline.com/wp-content/uploads/2015/10/Photo-Oct-06-8-04-58-PM-e1444176569312.jpg"
+worona.ad_website_url	   = "http://www.zeatery.com"
 
 -- ABOUT PAGE
 -- Configure About page options in: worona-mobile-app/worona-config/about.lua

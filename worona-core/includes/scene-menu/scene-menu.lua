@@ -51,6 +51,11 @@ local function newScene( scene_name )
 		worona.log:info("scene-menu - loadSceneList()")
 		worona:do_action( "go_to_scene", { scene_type = "scene-list", effect = "slideLeft", time = 200 } )
 	end
+	
+	local function loadPreviousScene()
+		worona.log:info("scene-menu - loadPreviousScene()")
+		worona:do_action( "load_previous_scene", { effect = "slideLeft", time = 200 } )
+	end
 
 	local function exitApp()
 		native.requestExit()
@@ -290,7 +295,9 @@ local function newScene( scene_name )
 
 		local navbar_options = worona:do_filter( "filter_menu_list_nabvar_options", {
 			parent            = sceneGroup,
-			text              = "Menu"
+			text              = "Menu",
+			left_button_icon  = nil,
+			right_button_icon = worona.style:get("icons").menu
 		})
 
 		--: load the navbar
@@ -320,7 +327,8 @@ local function newScene( scene_name )
 			-- Example: start timers, begin animation, play audio, etc.
 			scene_action.phase = "did"
 
-			worona:add_action("android_back_button_pushed", exitApp)	 
+			worona:add_action("android_back_button_pushed", exitApp)
+			worona:add_action("navbar_right_button_pushed", loadPreviousScene)	 
 		end
 	end
 
@@ -337,7 +345,8 @@ local function newScene( scene_name )
 			-- Example: stop timers, stop animation, stop audio, etc.
 			scene_action.phase = "will"
 
-			worona:remove_action("android_back_button_pushed", exitApp)	 
+			worona:remove_action("android_back_button_pushed", exitApp)
+			worona:remove_action("navbar_right_button_pushed", loadPreviousScene)	 
 
 		elseif ( phase == "did" ) then
 			-- Called immediately after scene goes off screen.
