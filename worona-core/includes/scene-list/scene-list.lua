@@ -269,7 +269,8 @@ local function newScene( scene_name )
 				    --. Insert the current row into the scrollView
 				    scrollView:insertRow (row_options)
 				    inserted_posts_counter = inserted_posts_counter + 1
-				    if inserted_posts_counter == 10 then --. Create an ad
+				    
+				    if inserted_posts_counter == 10 and worona.display_ad then --. Create an ad
 				    	local row_group = display.newGroup() --. All row elements must me inserted in this group.
 
 						local title_options = 
