@@ -369,7 +369,9 @@ local function newScene( scene_name )
 			worona.log:error("scene-list/refreshScrollViewContent: content = nil")
 			showNoPostsAvailable()
 		end
-
+		
+		scrollView:scrollTo( "top", { time = 0 } )
+		
 		worona.log:info("scene-list - refreshScrollViewContent()")
 	end
 	worona:add_action( "content_file_updated", refreshScrollViewContent )
@@ -467,7 +469,7 @@ local function newScene( scene_name )
 			end
 
 			insertContentInScrollView()	
-			scrollView:scrollTo( "top", { time = 0 } )
+			if current_posts_shown == "favorites" then scrollView:scrollTo( "top", { time = 0 } ) end
 
 			--: load the navbar
 			navbar = worona.ui:newBasicNavBar({
