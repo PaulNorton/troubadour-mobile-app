@@ -116,6 +116,8 @@ local function newScene( scene_name )
 	                display.getCurrentStage():setFocus(nil)
 	                if params.content.link ~= "AD" then
 	                	worona:do_action( "load_url", { url = params.content.link } )
+	                else
+	                	row_rect:addEventListener( "touch", function(e) if e.phase == "ended" then system.openURL( worona.ad_website_url ) end  end )
 	                end
 	            elseif event.phase == "cancelled" then
 	            	row_rect:setFillColor( params.row_color.default[1], params.row_color.default[2], params.row_color.default[3], params.row_color.default[4] ) 
@@ -294,7 +296,7 @@ local function newScene( scene_name )
 							row_text   = row_text,
 							row_height = row_text.height,
 							row_color  = user_config_style.post_list_row_color,
-							content    = {link = worona.ad_website_url},
+							content    = { link = "AD" },
 							row_group  = row_group					    	
 						}
 						row_options = worona:do_filter( "filter_list_row_options", row_options )
